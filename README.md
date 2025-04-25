@@ -1,9 +1,10 @@
-
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.4</H3>
-<H3>DATE:</H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
+
+<H3>NAME: GIFTSON RAJARATHINAM N A</H3>
+<H3>REGISTER NO.: 212222233002</H3>
+<H3>EX. NO.4</H3>
+<H3>DATE: 25.04.2025</H3>
+
 <H3>Aim:</H3>
 To implement a Multilayer Perceptron for Multi classification
 <H3>Theory</H3>
@@ -116,11 +117,46 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+``` py
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+# Load dataset
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']
+irisdata = pd.read_csv(url, names=names)
+
+# Prepare features and target
+X = irisdata.iloc[:, :-1]
+y = LabelEncoder().fit_transform(irisdata['Class'])
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Feature scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train MLP Classifier
+mlp = MLPClassifier(hidden_layer_sizes=(10, 10, 10), max_iter=1000)
+mlp.fit(X_train, y_train)
+
+# Predictions and evaluation
+predictions = mlp.predict(X_test)
+print(confusion_matrix(y_test, predictions))
+print(classification_report(y_test, predictions))
+
+```
 
 <H3>Output:</H3>
 
-Show your results here
+![Screenshot 2025-04-25 113726](https://github.com/user-attachments/assets/ff9e97e2-0a80-4408-b318-d9c964cb459e)
+
+
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
